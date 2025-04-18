@@ -148,3 +148,6 @@ dmypy.json
 cython_debug/
 
 .DS_Store
+
+run_gunicorn.sh
+*.log
