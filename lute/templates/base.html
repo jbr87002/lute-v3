@@ -74,14 +74,18 @@
         </h1>
       </div>
     </div>
-    <div class="menu">
+    <button id="menu-toggle" class="menu-toggle" type="button" aria-controls="main-menu" aria-expanded="false">
+      <span class="menu-toggle-icon" aria-hidden="true"></span>
+      <span class="menu-toggle-text">Menu</span>
+    </button>
+    <div class="menu" id="main-menu">
       {% if not hide_homelink %}
       <div class="menu-item">
         <span><a class="home-link" href="/">Home</a></span>
       </div>
       {% endif %}
       {% if have_languages %}
-      <div class="menu-item">
+      <div class="menu-item has-submenu">
         <span id="menu_books">Books</span>
         <ul class="sub-menu">
           <li><a id="book_new" href="/book/new">Create new Book</a></li>
@@ -89,7 +93,7 @@
           <li><a href="/book/archived">Book archive</a></li>
         </ul>
       </div>
-      <div class="menu-item">
+      <div class="menu-item has-submenu">
         <span id="menu_terms">Terms</span>
         <ul class="sub-menu">
           <li><a id="term_index" href="/term/index">Terms</a></li>
@@ -98,7 +102,7 @@
         </ul>
       </div>
       {% endif %}
-      <div class="menu-item">
+      <div class="menu-item has-submenu">
         <span id="menu_settings">Settings</span>
         <ul class="sub-menu">
           <li><a id="lang_index" href="/language/index">Languages</a></li>
@@ -108,7 +112,7 @@
         </ul>
       </div>
       {% if backup_enabled and backup_directory != '' %}
-      <div class="menu-item">
+      <div class="menu-item has-submenu">
         <span>Backup</span>
         <ul class="sub-menu last-sub-menu">
           {% if backup_last_display_date is not none %}
@@ -123,7 +127,7 @@
         </ul>
       </div>
       {% endif %}
-      <div class="menu-item">
+      <div class="menu-item has-submenu">
         <span id="menu_about">About</span>
         <ul class="sub-menu last-sub-menu">
           <li><a href="/version">Version and software info</a></li>
@@ -154,5 +158,6 @@
     }
   });
 </script>
+<script type="text/javascript" src="/static/js/never_cache/mobile-menu.js" charset="utf-8"></script>
 
 </html>

@@ -96,6 +96,53 @@ p.version {
     gap: 2.2rem;
 }
 
+.menu-toggle {
+    display: none;
+    align-items: center;
+    gap: 0.4rem;
+    border: 1px solid #ddd;
+    background: #fff;
+    color: #111;
+    padding: 0.35rem 0.6rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.menu-toggle:focus-visible {
+    outline: 2px solid #79b7e7;
+    outline-offset: 2px;
+}
+
+.menu-toggle-icon {
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 2px;
+    background: #111;
+    border-radius: 2px;
+}
+
+.menu-toggle-icon::before,
+.menu-toggle-icon::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 20px;
+    height: 2px;
+    background: #111;
+    border-radius: 2px;
+}
+
+.menu-toggle-icon::before {
+    top: -6px;
+}
+
+.menu-toggle-icon::after {
+    top: 6px;
+}
+
 .menu-item {
     position: relative; /* Required for sub-menu positioning */
 }
@@ -140,6 +187,104 @@ p.version {
 }
 
 /* end menu bar. */
+
+/* Main menu, mobile */
+@media screen and (max-width: 980px) {
+    .container {
+        width: 100%;
+        padding: 0 0.75rem;
+    }
+
+    .menu-bar {
+        flex-wrap: wrap;
+        align-items: center;
+        padding: 1rem 0;
+        gap: 0.5rem;
+    }
+
+    .header {
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+
+    .menu-toggle {
+        display: inline-flex;
+    }
+
+    .menu {
+        display: none;
+        flex-basis: 100%;
+        flex-direction: column;
+        gap: 0.25rem;
+        padding: 0.25rem 0 0.5rem;
+        border-top: 1px solid #e5e5e5;
+    }
+
+    .menu.is-open {
+        display: flex;
+    }
+
+    .menu-item {
+        width: 100%;
+    }
+
+    .menu-item > span,
+    .menu-item > span > a {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .menu-item > span,
+    .menu-item > span > a {
+        padding: 0.6rem 0.2rem;
+    }
+
+    .menu-item.has-submenu > span::after {
+        content: "▾";
+        font-size: 0.9rem;
+        color: #444;
+        margin-left: 0.5rem;
+    }
+
+    .sub-menu {
+        position: static;
+        display: none;
+        padding: 0 0 0.4rem;
+        margin: 0;
+        border: none;
+        background: transparent;
+        box-shadow: none;
+    }
+
+    .menu-item.open .sub-menu {
+        display: block;
+    }
+
+    .menu-item:hover .sub-menu {
+        display: none;
+    }
+
+    .sub-menu li {
+        margin: 0.2rem 0;
+    }
+
+    .sub-menu li a {
+        display: block;
+        padding: 0.45rem 0.2rem 0.45rem 0.8rem;
+    }
+
+    div#divbooktable {
+        width: 100% !important;
+    }
+
+    div.toolbar {
+        float: none;
+        margin: 0.5rem 0;
+    }
+}
+/* End main menu, mobile */
 
 /* Book listing */
 
