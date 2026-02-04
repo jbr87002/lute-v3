@@ -286,6 +286,59 @@ p.version {
 }
 /* End main menu, mobile */
 
+/* Book listing, mobile */
+@media screen and (max-width: 980px) {
+    #booktable_wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    #booktable {
+        width: 100% !important;
+    }
+
+    #defaultLanguageSelect {
+        width: 100%;
+        margin: 0.5rem 0;
+    }
+
+    div.dt-container .dt-search input {
+        width: 100%;
+        margin-left: 0;
+        box-sizing: border-box;
+    }
+
+    div.dt-container div.dt-layout-row,
+    div.dt-container div.dt-layout-cell {
+        display: block;
+        text-align: left;
+    }
+
+    div#booktable_wrapper div.dt-info,
+    div#booktable_wrapper div.dt-paging {
+        display: block;
+        margin-top: 0.5rem;
+    }
+}
+
+@media screen and (max-width: 720px) {
+    #booktable td:nth-child(4),
+    #booktable th:nth-child(4),
+    #booktable td:nth-child(6),
+    #booktable th:nth-child(6) {
+        display: none;
+    }
+
+    #booktable td:nth-child(5) {
+        min-width: 120px;
+    }
+
+    #booktable td:nth-child(7) {
+        white-space: nowrap;
+    }
+}
+/* End book listing, mobile */
+
 /* Book listing */
 
 div#divbooktable {
@@ -2275,6 +2328,27 @@ input[name='status']:disabled + label {
 
     table#term {
         width: 100% !important;
+    }
+
+    #reading-header {
+        box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
+    }
+
+    .hamburger-btn {
+        border-color: #dedede;
+        background-color: #fff;
+    }
+
+    span.hamburger {
+        background: #555;
+    }
+
+    div#thetext p {
+        line-height: 1.6;
+    }
+
+    span.textitem {
+        font-size: 18px;
     }
 }
 
