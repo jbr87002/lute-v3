@@ -18,6 +18,7 @@ from flask import (
     make_response,
     send_from_directory,
     jsonify,
+    url_for,
 )
 from sqlalchemy.event import listens_for
 from sqlalchemy.pool import Pool
@@ -60,6 +61,7 @@ from lute.settings.routes import bp as settings_bp
 from lute.themes.routes import bp as themes_bp
 from lute.stats.routes import bp as stats_bp
 from lute.cli.commands import bp as cli_bp
+from lute.auth.routes import bp as auth_bp
 
 
 def _setup_app_dir(dirname, readme_content):
@@ -299,6 +301,7 @@ def _create_app(app_config, extra_config):
         "ENV": app_config.env,
         "SQLALCHEMY_DATABASE_URI": f"sqlite:///{app_config.dbfilename}",
         "DATAPATH": app_config.datapath,
+        "BASIC_PASSWORD": app_config.basic_password,
         # ref https://flask-sqlalchemy.palletsprojects.com/en/2.x/config/
         # Don't track mods.
         "SQLALCHEMY_TRACK_MODIFICATIONS": False,
@@ -311,6 +314,21 @@ def _create_app(app_config, extra_config):
 
     final_config = {**config, **extra_config}
     app.config.from_mapping(final_config)
+
+    @app.before_request
+    def _require_basic_password():
+        required_pw = app.config.get("BASIC_PASSWORD")
+        if required_pw in [None, ""]:
+            return None
+
+        if request.path.startswith("/auth"):
+            return None
+
+        if request.cookies.get("lute_auth") == "1":
+            return None
+
+        next_url = request.full_path if request.full_path else request.path
+        return redirect(url_for("auth.login", next=next_url))
 
     # Attach the app_config to app so it's available at runtime.
     app.env_config = app_config
@@ -337,6 +355,7 @@ def _create_app(app_config, extra_config):
     app.register_blueprint(termtag_bp)
     app.register_blueprint(read_bp)
     app.register_blueprint(bing_bp)
+    app.register_blueprint(auth_bp)
     app.register_blueprint(userimage_bp)
     app.register_blueprint(useraudio_bp)
     app.register_blueprint(termimport_bp)

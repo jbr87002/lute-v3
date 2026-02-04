@@ -68,6 +68,10 @@ class AppConfig:  # pylint: disable=too-many-instance-attributes
             "BACKUP_PATH", os.path.join(self.datapath, "backups")
         )
 
+        # Basic password protection (low-security, meant to deter crawlers).
+        # If unset, defaults to "languages".
+        self.basic_password = config.get("BASIC_PASSWORD", "languages")
+
     def _get_appdata_dir(self):
         "Get user's appdata directory from platformdirs."
         dirs = PlatformDirs("Lute3", "Lute3")
